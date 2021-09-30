@@ -27,11 +27,27 @@ async function validateUserId(req, res, next) {
 }
 
 async function validateUser(req, res, next) {
-  next()
+  const {name} = req.body
+  if(!name || !name.trim()){
+    res.status(400).json({
+      message: "Name field is required"
+    })
+  }else{
+    req.name = name.trim()
+    next()
+  }
 }
 
 async function validatePost(req, res, next) {
-  next()
+  const {text} = req.body
+  if(!text || !text.trim()){
+    res.status(400).json({
+      message: "Text field is required"
+    })
+  }else{
+    req.text = text.trim()
+    next()
+  }
 }
 
 module.exports = {

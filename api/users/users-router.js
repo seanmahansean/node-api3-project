@@ -16,15 +16,15 @@ router.get('/:id', validateUserId, (req, res) => {
 
 })
 
-router.post('/', (req, res) => {
+router.post('/', validateUser, (req, res) => {
 
 })
 
-router.put('/:id', validateUserId, (req, res) => {
+router.put('/:id', validateUserId, validateUser, (req, res) => {
 
 })
 
-router.delete('/:id', validateUserId, (req, res) => {
+router.delete('/:id', validateUserId, validateUser, (req, res) => {
 
 })
 
