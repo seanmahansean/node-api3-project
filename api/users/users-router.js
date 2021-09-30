@@ -23,7 +23,11 @@ router.get('/:id', validateUserId, (req, res, next) => {
 })
 
 router.post('/', validateUser, (req, res, next) => {
-  User.insert({})
+  User.insert({name: req.name})
+    .then(newUser => {
+      res.status(201).json(newUser)
+    })
+    .catch(next)
 })
 
 router.put('/:id', validateUserId, validateUser, (req, res, next) => {
