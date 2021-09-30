@@ -31,7 +31,11 @@ router.post('/', validateUser, (req, res, next) => {
 })
 
 router.put('/:id', validateUserId, validateUser, (req, res, next) => {
-
+  User.update(req.params.id, {name: req.name})
+  .then(updatedUser => {
+    res.json(updatedUser)
+  })
+  .catch(next)
 })
 
 router.delete('/:id', validateUserId, validateUser, (req, res, next) => {
