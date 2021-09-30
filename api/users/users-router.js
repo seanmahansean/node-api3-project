@@ -38,16 +38,34 @@ router.put('/:id', validateUserId, validateUser, (req, res, next) => {
   .catch(next)
 })
 
-router.delete('/:id', validateUserId, validateUser, (req, res, next) => {
-
+router.delete('/:id', validateUserId, validateUser, async (req, res, next) => {
+  try{
+    await User.remove(req.params.id)
+    res.json(req.user)
+  }catch(err){
+    next(err)
+  }
 })
 
-router.get('/:id/posts', validateUserId, (req, res, next) => {
-
+router.get('/:id/posts', validateUserId, async (req, res, next) => {
+  try{
+    const result = await User.getUserPosts(req.params.id)
+    res.json(result)
+  }catch(err){
+    next(err)
+  }
 })
 
-router.post('/:id/posts', validateUserId, (req, res, next) => {
-
+router.post('/:id/posts', validateUserId, async (req, res, next) => {
+  try{
+    const result = await Post.insert({
+      user_id: req.params.id,
+      text: req.text
+    })
+    res.status(201).json(result)
+  }catch(err){
+    next(err)
+  }
 })
 
 router.use((err, req, res, next) => { //eslint-disable-line
