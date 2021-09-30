@@ -19,12 +19,11 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:id', validateUserId, (req, res, next) => {
-  if()
   res.json(req.user)
 })
 
 router.post('/', validateUser, (req, res, next) => {
-
+  User.insert({})
 })
 
 router.put('/:id', validateUserId, validateUser, (req, res, next) => {
